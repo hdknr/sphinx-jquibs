@@ -9,7 +9,9 @@ Welcome to Sphinx Theme with jQuery UI Bootstrap's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+    :maxdepth: 2
+
+    jquibs
 
 
 

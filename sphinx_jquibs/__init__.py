@@ -2,6 +2,8 @@ __all__ = ('__version__', '__build__','conf',)
 __version__ = (0,0,1)
 __build__ = ''
 
+import os
+
 def get_version():
     return '.'.join( map( lambda v:str(v),__version__) )
 

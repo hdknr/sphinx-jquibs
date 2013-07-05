@@ -1,15 +1,20 @@
 {% extends "basic/layout.html" %}
 
-{% set script_files = script_files + [
-    '_static/js/jquery-1.8.3.min.js',
-    '_static/js/jquery-ui-1.9.2.custom.min.js',
-  ]
+{% set script_files = [
+    '_static/assets/js/jquery-1.8.3.min.js',
+    '_static/assets/js/jquery-ui-1.10.0.custom.min.js',
+    '_static/assets/js/bootstrap.min.js',
+    '_static/assets/js/docs.js',
+    '_static/underscore.js',    
+    '_static/doctools.js',  
+    '_static/jquibs.js',
+    ]
 %}
 
 {% set css_files = [
     '_static/assets/css/bootstrap.min.css',
-    '_static/css/custom-theme/jquery-ui-1.10.2.custom.css',
-    '_static/css/assets/css/font-awesome.min.css',
+    '_static/assets/css/font-awesome.min.css',
+    '_static/css/custom-theme/jquery-ui-1.9.2.custom.css',
     '_static/assets/js/google-code-prettify/prettify.css', 
   ] + css_files
 %}
@@ -30,7 +35,8 @@
 {# Sidebar: Rework into our Boostrap nav section. #}
 {% macro navBar() %}
 
-  <div id="navbar" class="{{ theme_navbar_class }} {% if theme_navbar_fixed_top == 'true' -%} navbar-fixed-top{%- endif -%}">
+  <div id="navbar" class="navbar navbar-inverse navbar-fixed-top" >
+{#            {{ theme_navbar_class }} {% if theme_navbar_fixed_top == 'true' -%} navbar-fixed-top{%- endif -%}">   #}
     <div class="navbar-inner">
       <div class="container">
         <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
@@ -42,7 +48,7 @@
 
         <a class="brand" href="{{ pathto(master_doc) }}">{% if theme_navbar_title -%}{{ theme_navbar_title|e }}{%- else -%}{{ project|e }}{%- endif -%}</a>
 
-        <span class="navbar-text pull-left"><b>{{ version|e }}</b></span>
+{#        <span class="navbar-text pull-left"><b>{{ version|e }}</b></span>     #}
 
         <div class="nav-collapse">
           <ul class="nav">
@@ -85,7 +91,7 @@
 
 {%- block content %}
 
-{# {{ navBar() }} #}
+{{ navBar() }}
 
 <div class="container">
   {% block body %}{% endblock %}
@@ -98,7 +104,7 @@
 <footer class="footer">
   <div class="container">
     <p class="pull-right">
-      <a href="#">Back to top</a>
+      <a class="button" href="#">Back to top</a>
       {% if theme_source_link_position == "footer" %}
         <br/>
         {% include "sourcelink.html" %}
@@ -107,7 +113,8 @@
     <p>
     {%- if show_copyright %}
       {%- if hasdoc('copyright') %}
-        {% trans path=pathto('copyright'), copyright=copyright|e %}&copy; <a href="{{ path }}">Copyright</a> {{ copyright }}.{% endtrans %}<br/>
+        {% trans path=pathto('copyright'), copyright=copyright|e %} 
+            &copy; <a href="{{ path }}">Copyright</a> {{ copyright }}.{% endtrans %}<br/>
       {%- else %}
         {% trans copyright=copyright|e %}&copy; Copyright {{ copyright }}.{% endtrans %}<br/>
       {%- endif %}
@@ -122,4 +129,16 @@
   </div>
 </footer>
 <script src="_static/jquibs.js"></script>
+<script>
+$(function(){
+    var $window = $(window);
+    $("a.button").button();
+//    $("ul.simple").affix({
+//            offset: {
+//                top: function () { return $window.width() <= 980 ? 290 : 210 }
+//                , bottom: 270 
+//            }   
+//        }); 
+});
+</script>
 {%- endblock %}
